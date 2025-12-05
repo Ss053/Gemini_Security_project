@@ -1,5 +1,6 @@
 package com.learn.GeminiProject.controller;
 
+import com.learn.GeminiProject.DTO.TaskDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.config.Task;
@@ -14,7 +15,7 @@ public class TodoController {
 
     //Create a new task for the authenticated user.
     @PostMapping("/tasks")
-    public ResponseEntity<String> createTask(@RequestBody Task task) {
+    public ResponseEntity<TaskDto> createTask(@RequestBody Task task) {
         return new ResponseEntity<>("", HttpStatus.CREATED);
     }
 
