@@ -1,9 +1,10 @@
 package com.learn.GeminiProject.controller;
 
 import com.learn.GeminiProject.DTO.TaskDto;
-import org.springframework.http.HttpStatus;
+import com.learn.GeminiProject.models.Task;
+import com.learn.GeminiProject.services.TodoServices;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
+@RequiredArgsConstructor
 public class TodoController {
+    private final TodoServices todoServices;
 
     //Create a new task for the authenticated user.
     @PostMapping("/tasks")
-    public ResponseEntity<TaskDto> createTask(@RequestBody Task task) {
-        return new ResponseEntity<>("", HttpStatus.CREATED);
+    public ResponseEntity<Task> createTask(@RequestBody TaskDto task) {
+        return todoServices.createTask(task);
     }
 
     //Retrieve all tasks belonging to the authenticated user.

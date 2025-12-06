@@ -5,15 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Task {
     @Id
     @GeneratedValue
