@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,7 @@ public class TodoServicesImp implements TodoServices{
         newTask.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
         Task a = taskRepo.save(newTask);
         if (a.getId() > 0) {
-
-        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
         }else {
              throw new ServiceException("Task not created");
         }
@@ -35,8 +35,9 @@ public class TodoServicesImp implements TodoServices{
     }
 
     @Override
-    public ResponseEntity<List<TaskDto>> getAllTasks() {
-        return null;
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskRepo.findAll();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @Override

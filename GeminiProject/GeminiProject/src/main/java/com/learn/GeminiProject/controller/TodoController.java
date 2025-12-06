@@ -25,7 +25,7 @@ public class TodoController {
     //Retrieve all tasks belonging to the authenticated user.
     @GetMapping("/tasks")
     public ResponseEntity<List<Task>> getAllTasks() {
-        return ResponseEntity.ok().body(new ArrayList<Task>());
+        return todoServices.getAllTasks();
     }
 
     //Retrieve a specific task by its ID. (Must check ownership).
