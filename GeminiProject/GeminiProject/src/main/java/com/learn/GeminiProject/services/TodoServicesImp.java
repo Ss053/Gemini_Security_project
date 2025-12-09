@@ -48,13 +48,11 @@ public class TodoServicesImp implements TodoServices{
 
     @Override
     public ResponseEntity<TaskDto> updateTask(Long id, TaskDto taskDto) {
-        Task task = modelMapper.map(taskDto, Task.class);
-        TaskDto getTask;
-        if(taskRepo.existsById(id)){
-             getTask = modelMapper.map(taskRepo.save(task), TaskDto.class);
-        }else{
-            throw new ServiceException("Task not found");
-        }
+        Task existingTask = taskRepo.findById(id)
+                .orElseThrow(() -> new ServiceException("Task not found"));
+        modelMapper.map(taskDto, existingTask);
+        existingTask.setId(id);
+        TaskDto getTask = modelMapper.map(taskRepo.save(existingTask), TaskDto.class);
         return new ResponseEntity<>(getTask, HttpStatus.ACCEPTED);
     }
 

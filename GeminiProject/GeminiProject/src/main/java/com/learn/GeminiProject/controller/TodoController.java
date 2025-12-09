@@ -34,7 +34,7 @@ public class TodoController {
     }
 
     //Update an existing task. (Must check ownership).
-    @PutMapping("/task/{id}")
+    @PutMapping("/tasks/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto task) {
         return todoServices.updateTask(id, task);
     }
