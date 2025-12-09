@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
-@Configuration
+
 @RequiredArgsConstructor
 public class GeminiProjectUserDetailsService implements UserDetailsService {
     private final UserRepo userRepo;

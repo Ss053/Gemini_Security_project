@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,19 +29,19 @@ public class TodoController {
 
     //Retrieve a specific task by its ID. (Must check ownership).
     @GetMapping("/tasks/{id}")
-    public ResponseEntity<String> getTask(@PathVariable Long id) {
-        return ResponseEntity.ok().body("Task with id " + id);
+    public ResponseEntity<TaskDto> getTask(@PathVariable Long id) {
+        return todoServices.getTask(id);
     }
 
     //Update an existing task. (Must check ownership).
     @PutMapping("/task/{id}")
-    public ResponseEntity<String> updateTask(@PathVariable Long id, @RequestBody Task task) {
-        return ResponseEntity.ok().body("Task with id " + id);
+    public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto task) {
+        return todoServices.updateTask(id, task);
     }
 
     //Delete a specific task. (Must check ownership).
     @DeleteMapping("/task/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
-        return ResponseEntity.ok().body("Task with id " + id);
+        return todoServices.deleteTask(id);
     }
 }

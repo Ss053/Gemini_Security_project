@@ -16,3 +16,8 @@
 - getTask
 - updateTask
 - deleteTask
+
+## UserServices
+- createUser
+- updateUser
+- deleteUser
