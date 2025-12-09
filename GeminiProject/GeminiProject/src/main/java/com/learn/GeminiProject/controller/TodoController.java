@@ -40,7 +40,7 @@ public class TodoController {
     }
 
     //Delete a specific task. (Must check ownership).
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/tasks/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
         return todoServices.deleteTask(id);
     }

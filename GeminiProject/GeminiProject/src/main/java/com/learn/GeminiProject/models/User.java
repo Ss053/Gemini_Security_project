@@ -31,7 +31,7 @@ public class User {
     private String email;
     private String role;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tasks")
     private Set<Task> tasks;
 

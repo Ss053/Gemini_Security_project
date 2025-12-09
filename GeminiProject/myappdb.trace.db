@@ -183,3 +183,36 @@ create table user (id bigint not null, email varchar(255) not null, password var
 2025-12-09 19:22:06.855169+05:30 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
 alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
+2025-12-09 19:46:31.053331+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop table if exists [*]user cascade "; expected "identifier"; SQL statement:
+drop table if exists user cascade  [42001-240]
+2025-12-09 19:46:31.093292+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id)) [42001-240]
+2025-12-09 19:46:31.098295+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
+2025-12-09 19:51:01.782050+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id)) [42001-240]
+2025-12-09 19:51:01.821049+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
+2025-12-09 19:52:20.715999+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id)) [42001-240]
+2025-12-09 19:52:20.767007+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
+2025-12-09 19:53:35.489042+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id)) [42001-240]
+2025-12-09 19:53:35.517039+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
+2025-12-09 20:02:01.007212+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, email varchar(255) not null, password varchar(255), role varchar(255), username varchar(255) not null, primary key (id)) [42001-240]
+2025-12-09 20:02:01.039217+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists task add constraint FK74h1ob6wa6ujaihwg2b78ff0 foreign key (tasks) references user [42001-240]
