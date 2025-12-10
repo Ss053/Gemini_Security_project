@@ -30,9 +30,11 @@ public class TodoServicesImp implements TodoServices{
         newTask.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
         Task a = taskRepo.save(newTask);
 
+        //Check assigned task
         if (a.getId() > 0) {
             return new ResponseEntity<>(newTask, HttpStatus.CREATED);
         }else {
+            //Exception
              throw new ServiceException("Task not created");
         }
 
@@ -89,10 +91,11 @@ public class TodoServicesImp implements TodoServices{
 
         //Check the existence of id and Delete
         if(taskRepo.existsById(id)){
-            //Delete
+            //Delete task
             taskRepo.deleteById(id);
             return ResponseEntity.ok("Deleted the task");
         }else{
+            //Exception
             throw new ServiceException("Task not found");
         }
     }

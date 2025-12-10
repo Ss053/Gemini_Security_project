@@ -18,30 +18,35 @@ public class TodoController {
     //Create a new task for the authenticated user.
     @PostMapping("/tasks")
     public ResponseEntity<Task> createTask(@RequestBody TaskDto task) {
+        //Service Call
         return todoServices.createTask(task);
     }
 
     //Retrieve all tasks belonging to the authenticated user.
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskDto>> getAllTasks() {
+        //Service Call
         return todoServices.getAllTasks();
     }
 
     //Retrieve a specific task by its ID. (Must check ownership).
     @GetMapping("/tasks/{id}")
     public ResponseEntity<TaskDto> getTask(@PathVariable Long id) {
+        //Service Call
         return todoServices.getTask(id);
     }
 
     //Update an existing task. (Must check ownership).
     @PutMapping("/tasks/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto task) {
+        //Service Call
         return todoServices.updateTask(id, task);
     }
 
     //Delete a specific task. (Must check ownership).
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+        //Service Call
         return todoServices.deleteTask(id);
     }
 }
