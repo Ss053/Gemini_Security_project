@@ -23,7 +23,7 @@ public class TodoController {
 
     //Retrieve all tasks belonging to the authenticated user.
     @GetMapping("/tasks")
-    public ResponseEntity<List<Task>> getAllTasks() {
+    public ResponseEntity<List<TaskDto>> getAllTasks() {
         return todoServices.getAllTasks();
     }
 

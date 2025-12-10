@@ -1,5 +1,6 @@
 package com.learn.GeminiProject.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,7 +24,7 @@ public class Task {
     private String title;
     private String description;
     private LocalDate dueDate;
-    private Boolean completed;
+    private Boolean completed = false;
     private Timestamp createdOn;
     private Timestamp updatedOn;
 }
