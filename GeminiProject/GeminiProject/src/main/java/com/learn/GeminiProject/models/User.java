@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Set;
 
@@ -19,13 +18,13 @@ import java.util.Set;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @UniqueElements
+    @Column(unique = true)
     @NotBlank
     private String username;
     private String password;
-    @UniqueElements
+    @Column(unique = true)
     @Email
     @NotBlank
     private String email;

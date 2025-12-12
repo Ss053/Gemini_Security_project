@@ -1,8 +1,8 @@
 package com.learn.GeminiProject.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,12 +19,12 @@ import java.time.LocalDate;
 @Data
 public class Task {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String title;
     private String description;
     private LocalDate dueDate;
-    private Boolean completed = false;
+    private Boolean completed ;
     private Timestamp createdOn;
     private Timestamp updatedOn;
 }

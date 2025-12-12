@@ -49,4 +49,10 @@ public class TodoController {
         //Service Call
         return todoServices.deleteTask(id);
     }
+
+    //Delete all Task
+    @DeleteMapping("/tasks")
+    public ResponseEntity<String> deleteAllTask() {
+        return todoServices.deleteAllTask();
+    }
 }

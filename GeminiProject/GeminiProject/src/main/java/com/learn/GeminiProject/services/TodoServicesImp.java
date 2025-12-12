@@ -28,6 +28,7 @@ public class TodoServicesImp implements TodoServices{
 
         //Auto initialization of createdOn
         newTask.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        newTask.setCompleted(false);
         Task a = taskRepo.save(newTask);
 
         //Check assigned task
@@ -98,5 +99,15 @@ public class TodoServicesImp implements TodoServices{
             //Exception
             throw new ServiceException("Task not found");
         }
+    }
+
+    //Delete all Task
+    @Override
+    public ResponseEntity<String> deleteAllTask() {
+
+        //Delete
+        taskRepo.deleteAll();
+
+        return ResponseEntity.ok("Deleted all the tasks");
     }
 }

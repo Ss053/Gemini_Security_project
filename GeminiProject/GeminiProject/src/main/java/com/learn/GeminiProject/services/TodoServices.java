@@ -22,4 +22,7 @@ public interface TodoServices {
 
     // Delete of Task by id
     public ResponseEntity<String> deleteTask(Long id);
+
+    // Delete all Task
+    public ResponseEntity<String> deleteAllTask();
 }
