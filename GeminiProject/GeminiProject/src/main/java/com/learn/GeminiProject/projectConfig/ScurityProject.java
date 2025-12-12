@@ -47,4 +47,9 @@ public class ScurityProject {
 
         return new InMemoryUserDetailsManager(user, user2);
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return passwordEncoder().upgradeEncoding()
+    }
 }
