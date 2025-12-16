@@ -2,12 +2,16 @@ package com.learn.GeminiProject.services;
 
 import com.learn.GeminiProject.DTO.TaskDto;
 import com.learn.GeminiProject.models.Task;
+import com.learn.GeminiProject.projectConfig.GeminiProjectUserDetails;
 import com.learn.GeminiProject.repository.TaskRepo;
+import com.learn.GeminiProject.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -19,16 +23,40 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TodoServicesImp implements TodoServices{
     private final TaskRepo taskRepo;
+    private final UserRepo userRepo;
     private final ModelMapper modelMapper;
+
+
+    private GeminiProjectUserDetails getCurrentUserPrincipal() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // Throw a security-related exception, or handle the anonymous case
+            throw new ServiceException("User is not authenticated.");
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof GeminiProjectUserDetails customUser) {
+            return customUser;
+        } else {
+            // This happens if the user is logged in but not using your custom UserDetails
+            throw new ServiceException("Authentication principal type is incorrect.");
+        }
+    }
 
     //Creat new Task
     @Override
     public ResponseEntity<Task> createTask(TaskDto task) {
         Task newTask = modelMapper.map(task, Task.class);
 
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+
         //Auto initialization of createdOn
         newTask.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
         newTask.setCompleted(false);
+        newTask.setUserId(currentUser.getId());
+
         Task a = taskRepo.save(newTask);
 
         //Check assigned task

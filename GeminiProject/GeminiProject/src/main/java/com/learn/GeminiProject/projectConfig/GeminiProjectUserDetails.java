@@ -6,14 +6,17 @@ package com.learn.GeminiProject.projectConfig;
 
 import lombok.Getter;
 import org.jspecify.annotations.NullMarked;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+
 public @NullMarked class GeminiProjectUserDetails implements UserDetails {
 
     // *** IMPORTANT: Add the public getter for ID ***
+
     @Getter
     private final Long id; // <--- The new field for the ID
     private final String username;

@@ -33,6 +33,7 @@ public class TodoController {
     //Retrieve a specific task by its ID. (Must check ownership).
     @GetMapping("/tasks/{id}")
     @PreAuthorize("authentication.principal.id == #id")
+
     public ResponseEntity<TaskDto> getTask(@PathVariable Long id) {
         //Service Call
         return todoServices.getTask(id);
