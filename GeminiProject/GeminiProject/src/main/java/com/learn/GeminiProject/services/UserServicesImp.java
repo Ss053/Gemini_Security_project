@@ -9,18 +9,21 @@ import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserServicesImp implements UserServices {
     private final UserRepo userRepo;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
     @Override
     public ResponseEntity<UserDto> createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
        UserDto userDto = modelMapper.map(userRepo.save(user), UserDto.class);
+
        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
