@@ -14,6 +14,9 @@ public interface TodoServices {
     //Fetch all task
     public ResponseEntity<List<TaskDto>> getAllTasks();
 
+    //Fetch completed Task
+    public ResponseEntity<List<TaskDto>> getCompletedTask(boolean check);
+
     //Fetch task by Id
     public ResponseEntity<TaskDto> getTask(Long id);
 

@@ -30,6 +30,12 @@ public class TodoController {
         return todoServices.getAllTasks();
     }
 
+    @GetMapping("/tasks/")
+    public ResponseEntity<List<TaskDto>> getAllTasks(@RequestParam(required = false) boolean check) {
+        return todoServices.getCompletedTask(check);
+
+    }
+
     //Retrieve a specific task by its ID. (Must check ownership).
     @GetMapping("/tasks/{id}")
     @PreAuthorize("authentication.principal.id == #id")
@@ -41,6 +47,7 @@ public class TodoController {
 
     //Update an existing task. (Must check ownership).
     @PutMapping("/tasks/{id}")
+    @PreAuthorize("authentication.principal.id == #id")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto task) {
         //Service Call
         return todoServices.updateTask(id, task);
@@ -48,13 +55,14 @@ public class TodoController {
 
     //Delete a specific task. (Must check ownership).
     @DeleteMapping("/tasks/{id}")
+    @PreAuthorize("authentication.principal.id == #id")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
         //Service Call
         return todoServices.deleteTask(id);
     }
 
     //Delete all Task
-    @DeleteMapping("/tasks")
+    //@DeleteMapping("/tasks")
     public ResponseEntity<String> deleteAllTask() {
         return todoServices.deleteAllTask();
     }

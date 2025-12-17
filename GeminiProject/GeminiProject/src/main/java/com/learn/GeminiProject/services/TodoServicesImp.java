@@ -2,6 +2,7 @@ package com.learn.GeminiProject.services;
 
 import com.learn.GeminiProject.DTO.TaskDto;
 import com.learn.GeminiProject.models.Task;
+import com.learn.GeminiProject.models.User;
 import com.learn.GeminiProject.projectConfig.GeminiProjectUserDetails;
 import com.learn.GeminiProject.repository.TaskRepo;
 import com.learn.GeminiProject.repository.UserRepo;
@@ -55,7 +56,8 @@ public class TodoServicesImp implements TodoServices{
         //Auto initialization of createdOn
         newTask.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
         newTask.setCompleted(false);
-        newTask.setUserId(currentUser.getId());
+        User user = userRepo.findByUsername(currentUser.getUsername()).orElse(null);
+        newTask.setUserId(user);
 
         Task a = taskRepo.save(newTask);
 
@@ -73,12 +75,28 @@ public class TodoServicesImp implements TodoServices{
     @Override
     public ResponseEntity<List<TaskDto>> getAllTasks() {
 
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+
+        User user = userRepo.findByUsername(currentUser.getUsername()).orElseThrow(() -> new ServiceException("User is not found."));
         //Stream for Task -> TaskDto
-        List<TaskDto> tasks = taskRepo.findAll().stream()
+        List<TaskDto> tasks = user.getTasks().stream()
                 .map(taskDto -> modelMapper.map(taskDto, TaskDto.class))
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<TaskDto>> getCompletedTask(boolean check) {
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+
+        User user = userRepo.findByUsername(currentUser.getUsername()).orElseThrow(() -> new ServiceException("User is not found."));
+
+        List<TaskDto> tasks = user.getTasks().stream()
+                .filter(task -> Boolean.valueOf(check).equals(task.getCompleted()))
+                .map(y -> modelMapper.map(y, TaskDto.class))
+                .toList();
+        return new ResponseEntity<>(tasks, HttpStatus.FOUND);
     }
 
     //Fetch task by Id

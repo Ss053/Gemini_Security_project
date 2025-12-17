@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -30,9 +31,9 @@ public class User {
     private String email;
     private String role;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "tasks")
-    private Set<Task> tasks;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userId")
+    //@JoinColumn(name = "tasks" )
+    private List<Task> tasks;
 
     
 }
