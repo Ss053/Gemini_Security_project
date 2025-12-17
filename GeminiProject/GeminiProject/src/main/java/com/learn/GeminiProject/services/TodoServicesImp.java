@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.security.access.AccessDeniedException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -101,14 +102,18 @@ public class TodoServicesImp implements TodoServices{
 
     //Fetch task by Id
     @Override
-    public ResponseEntity<TaskDto> getTask(Long id) {
+    public ResponseEntity<TaskDto> getTask(Long id)  {
         //Conversion Task -> TaskDto
-        TaskDto getTask = modelMapper.map(taskRepo.findById(id), TaskDto.class);
+        Task task = taskRepo.findById(id).orElseThrow(() -> new ServiceException("Task not found."));
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+        System.out.println(currentUser.getId());
+        if(!task.getUserId().getId().equals(currentUser.getId())){
+            throw new AccessDeniedException("unauthorised access");
+        }
+        TaskDto getTask = modelMapper.map(task, TaskDto.class);
 
         //Check Task is generated
-        if (getTask.getId() == null) {
-            throw new ServiceException("Task not found");
-        }
+
 
         return ResponseEntity.ok(getTask);
     }
@@ -117,18 +122,22 @@ public class TodoServicesImp implements TodoServices{
     @Override
     public ResponseEntity<TaskDto> updateTask(Long id, TaskDto taskDto) {
         // Check existence of task by id
-        Task existingTask = taskRepo.findById(id)
-                .orElseThrow(() -> new ServiceException("Task not found"));
+        Task task = taskRepo.findById(id).orElseThrow(() -> new ServiceException("Task not found."));
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+        if(!task.getUserId().getId().equals(currentUser.getId())){
+            throw new AccessDeniedException("unauthorised access");
+        }
+
 
         // Conversion of TaskDto -> Task
-        modelMapper.map(taskDto, existingTask);
+        modelMapper.map(taskDto, task);
 
         // Assign id and Time of update
-        existingTask.setId(id);
-        existingTask.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        task.setId(id);
+        task.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
 
         //Conversion Task -> TaskDto
-        TaskDto getTask = modelMapper.map(taskRepo.save(existingTask), TaskDto.class);
+        TaskDto getTask = modelMapper.map(taskRepo.save(task), TaskDto.class);
         return new ResponseEntity<>(getTask, HttpStatus.ACCEPTED);
     }
 
@@ -136,15 +145,17 @@ public class TodoServicesImp implements TodoServices{
     @Override
     public ResponseEntity<String> deleteTask(Long id) {
 
+        Task task = taskRepo.findById(id).orElseThrow(() -> new ServiceException("Task not found."));
+        GeminiProjectUserDetails currentUser = getCurrentUserPrincipal();
+        if(!task.getUserId().getId().equals(currentUser.getId())){
+            throw new AccessDeniedException("unauthorised access");
+        }
         //Check the existence of id and Delete
-        if(taskRepo.existsById(id)){
+
             //Delete task
             taskRepo.deleteById(id);
             return ResponseEntity.ok("Deleted the task");
-        }else{
-            //Exception
-            throw new ServiceException("Task not found");
-        }
+
     }
 
     //Delete all Task

@@ -5,7 +5,6 @@ import com.learn.GeminiProject.models.Task;
 import com.learn.GeminiProject.services.TodoServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +29,8 @@ public class TodoController {
         return todoServices.getAllTasks();
     }
 
-    @GetMapping("/tasks/")
+    //Retrieve respected particular task.
+    @GetMapping("/taskComplete/{check}")
     public ResponseEntity<List<TaskDto>> getAllTasks(@RequestParam(required = false) boolean check) {
         return todoServices.getCompletedTask(check);
 
@@ -38,8 +38,7 @@ public class TodoController {
 
     //Retrieve a specific task by its ID. (Must check ownership).
     @GetMapping("/tasks/{id}")
-    @PreAuthorize("authentication.principal.id == #id")
-
+    //@PreAuthorize("authentication.principal.id == #id")
     public ResponseEntity<TaskDto> getTask(@PathVariable Long id) {
         //Service Call
         return todoServices.getTask(id);
@@ -47,7 +46,7 @@ public class TodoController {
 
     //Update an existing task. (Must check ownership).
     @PutMapping("/tasks/{id}")
-    @PreAuthorize("authentication.principal.id == #id")
+    //@PreAuthorize("authentication.principal.id == #id")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto task) {
         //Service Call
         return todoServices.updateTask(id, task);
@@ -55,7 +54,7 @@ public class TodoController {
 
     //Delete a specific task. (Must check ownership).
     @DeleteMapping("/tasks/{id}")
-    @PreAuthorize("authentication.principal.id == #id")
+    //PreAuthorize("authentication.principal.id == #id")
     public ResponseEntity<String> deleteTask(@PathVariable Long id) {
         //Service Call
         return todoServices.deleteTask(id);

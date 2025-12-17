@@ -4,6 +4,7 @@ import com.learn.GeminiProject.DTO.TaskDto;
 import com.learn.GeminiProject.models.Task;
 import org.springframework.http.ResponseEntity;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 public interface TodoServices {
@@ -18,7 +19,7 @@ public interface TodoServices {
     public ResponseEntity<List<TaskDto>> getCompletedTask(boolean check);
 
     //Fetch task by Id
-    public ResponseEntity<TaskDto> getTask(Long id);
+    public ResponseEntity<TaskDto> getTask(Long id) ;
 
     //Update task by id
     public ResponseEntity<TaskDto> updateTask(Long id ,TaskDto task);
